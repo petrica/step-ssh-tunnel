@@ -5,11 +5,11 @@ if [ -z $WERCKER_SSH_TUNNEL_SOURCE_PORT ]; then
 fi
 
 if [ -z $WERCKER_SSH_TUNNEL_DESTINATION_HOST ]; then
-  fail "You must specify a destination host"
+  WERCKER_SSH_TUNNEL_DESTINATION_HOST="127.0.0.1"
 fi
 
 if [ -z $WERCKER_SSH_TUNNEL_DESTINATION_PORT ]; then
-  fail "You must specify a destination port"
+  WERCKER_SSH_TUNNEL_DESTINATION_PORT="$WERCKER_SSH_TUNNEL_SOURCE_PORT"
 fi
 
 if [ $WERCKER_SSH_TUNNEL_CONNECTION_PORT ]; then
@@ -20,10 +20,10 @@ SSH_CONNECTION="$WERCKER_SSH_TUNNEL_CONNECTION_STRING $SSH_PORT"
 echo "SSH Connection: $SSH_CONNECTION"
 
 SSH_TUNNEL="$WERCKER_SSH_TUNNEL_SOURCE_PORT:$WERCKER_SSH_TUNNEL_DESTINATION_HOST:$WERCKER_SSH_TUNNEL_DESTINATION_PORT"
-echo "Opening tunnel with $SSH_TUNNEL"
+info "Opening tunnel with $SSH_TUNNEL"
 
 if  ! ssh -f -o ExitOnForwardFailure=yes -L $SSH_TUNNEL $SSH_CONNECTION sleep 10; then
   fail "\nUnable to connect to host"
 fi
 
-echo "\nPort forwarded successfully"
+success "\nPort forwarded successfully"
