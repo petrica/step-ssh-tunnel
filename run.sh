@@ -1,18 +1,18 @@
 #!/bin/bash
 
-if [ -z $WERCKER_SSH_TUNNEL_SOURCE_PORT ]; then
+if [ -z "$WERCKER_SSH_TUNNEL_SOURCE_PORT" ]; then
   fail "You must specify a source port to forward"
 fi
 
-if [ -z $WERCKER_SSH_TUNNEL_DESTINATION_HOST ]; then
+if [ -z "$WERCKER_SSH_TUNNEL_DESTINATION_HOST" ]; then
   WERCKER_SSH_TUNNEL_DESTINATION_HOST="127.0.0.1"
 fi
 
-if [ -z $WERCKER_SSH_TUNNEL_DESTINATION_PORT ]; then
+if [ -z "$WERCKER_SSH_TUNNEL_DESTINATION_PORT" ]; then
   WERCKER_SSH_TUNNEL_DESTINATION_PORT="$WERCKER_SSH_TUNNEL_SOURCE_PORT"
 fi
 
-if [ $WERCKER_SSH_TUNNEL_CONNECTION_PORT ]; then
+if [ "$WERCKER_SSH_TUNNEL_CONNECTION_PORT" ]; then
   SSH_PORT="-p $WERCKER_SSH_TUNNEL_CONNECTION_PORT"
 fi
 
@@ -22,7 +22,7 @@ echo "SSH Connection: $SSH_CONNECTION"
 SSH_TUNNEL="$WERCKER_SSH_TUNNEL_SOURCE_PORT:$WERCKER_SSH_TUNNEL_DESTINATION_HOST:$WERCKER_SSH_TUNNEL_DESTINATION_PORT"
 info "Opening tunnel with $SSH_TUNNEL"
 
-if  ! ssh -f -o ExitOnForwardFailure=yes -L $SSH_TUNNEL $SSH_CONNECTION sleep 10; then
+if  ! ssh -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION" sleep 10; then
   fail "\nUnable to connect to host"
 fi
 
