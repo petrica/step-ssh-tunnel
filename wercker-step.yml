@@ -1,0 +1,25 @@
+name: ssh-tunnel
+version: 0.1.0
+description: Open a SSH tunnel for the next command to make use of it.
+keywords:
+  - ssh
+  - tunnel
+  - remote
+  - port
+properties:
+  source-port:
+    type: string
+    required: false
+  destination-port:
+    type: string
+    required: false
+  destination-host:
+    type: string
+    required: false
+  connection-string:
+    type: string
+    required: false
+  connection-port:
+    type: string
+    required: false
+
