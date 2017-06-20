@@ -16,14 +16,14 @@ if [ "$WERCKER_SSH_TUNNEL_CONNECTION_PORT" ]; then
   SSH_PORT="-p $WERCKER_SSH_TUNNEL_CONNECTION_PORT"
 fi
 
-SSH_CONNECTION="$WERCKER_SSH_TUNNEL_CONNECTION_STRING $SSH_PORT"
-echo "SSH Connection: $SSH_CONNECTION"
+SSH_CONNECTION="$WERCKER_SSH_TUNNEL_CONNECTION_STRING"
+echo "SSH Connection: $SSH_CONNECTION $SSH_PORT"
 
 SSH_TUNNEL="$WERCKER_SSH_TUNNEL_SOURCE_PORT:$WERCKER_SSH_TUNNEL_DESTINATION_HOST:$WERCKER_SSH_TUNNEL_DESTINATION_PORT"
 info "Opening tunnel with $SSH_TUNNEL"
 
-if  ! ssh -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION" sleep 10; then
-  fail "\nUnable to connect to host"
+if  ! ssh -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION" "$SSH_PORT" sleep 10; then
+  fail "Unable to connect to host"
 fi
 
-success "\nPort forwarded successfully"
+success "Port forwarded successfully"
