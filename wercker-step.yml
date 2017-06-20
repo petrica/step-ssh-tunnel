@@ -1,5 +1,5 @@
 name: ssh-tunnel
-version: 0.1.0
+version: 0.1.1
 description: Open a SSH tunnel for the next command to make use of it.
 keywords:
   - ssh

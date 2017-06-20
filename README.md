@@ -10,4 +10,5 @@ Example:
             source-port: 3306
             destination-port: 3306
             destination-host: 127.0.0.1
-            connection-string: me@server:22
+            connection-string: me@server
+            connection-port: 22
