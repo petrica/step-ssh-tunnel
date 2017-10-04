@@ -12,3 +12,6 @@ Example:
             destination-host: 127.0.0.1
             connection-string: me@server
             connection-port: 22
+            keepalive: 20
+
+`keepalie` will keep the connection open for that amount of time then close tunnel.
