@@ -26,7 +26,7 @@ echo "SSH Connection: $SSH_CONNECTION $SSH_PORT"
 SSH_TUNNEL="$WERCKER_SSH_TUNNEL_SOURCE_PORT:$WERCKER_SSH_TUNNEL_DESTINATION_HOST:$WERCKER_SSH_TUNNEL_DESTINATION_PORT"
 info "Opening tunnel with $SSH_TUNNEL"
 
-if  ! ssh -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION" "$SSH_PORT" sleep '$WERCKER_SSH_TUNNEL_KEEPALIVE'; then
+if  ! ssh -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION" "$SSH_PORT" sleep $WERCKER_SSH_TUNNEL_KEEPALIVE; then
   fail "Unable to connect to host"
 fi
 
