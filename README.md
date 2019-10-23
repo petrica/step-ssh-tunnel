@@ -13,5 +13,6 @@ Example:
             connection-string: me@server
             connection-port: 22
             keepalive: 20
+            forward_only: yes|no
 
 `keepalie` will keep the connection open for that amount of time then close tunnel.
