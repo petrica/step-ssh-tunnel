@@ -20,18 +20,18 @@ if [ -z "$WERCKER_SSH_TUNNEL_KEEPALIVE" ]; then
   WERCKER_SSH_TUNNEL_KEEPALIVE="10"
 fi
 
-SSH_CONNECTION="$WERCKER_SSH_TUNNEL_CONNECTION_STRING $SSH_PORT"
+SSH_CONNECTION="$WERCKER_SSH_TUNNEL_CONNECTION_STRING"
 echo "SSH Connection: $SSH_CONNECTION $SSH_PORT"
 
 SSH_TUNNEL="$WERCKER_SSH_TUNNEL_SOURCE_PORT:$WERCKER_SSH_TUNNEL_DESTINATION_HOST:$WERCKER_SSH_TUNNEL_DESTINATION_PORT"
 info "Opening tunnel with $SSH_TUNNEL"
 
 if [ "${WERCKER_SSH_TUNNEL_FORWARD_ONLY,,}" == "yes" ];then
-  if  ! ssh -N -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION" ; then
+  if  ! ssh -N -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION" "$SSH_PORT" ; then
     fail "Unable to connect to host"
   fi
 else
-  if  ! ssh -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION"  sleep $WERCKER_SSH_TUNNEL_KEEPALIVE; then
+  if  ! ssh -f -o ExitOnForwardFailure=yes -L "$SSH_TUNNEL" "$SSH_CONNECTION" "$SSH_PORT" sleep $WERCKER_SSH_TUNNEL_KEEPALIVE; then
     fail "Unable to connect to host"
   fi
 fi
