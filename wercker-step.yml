@@ -1,5 +1,5 @@
 name: ssh-tunnel
-version: 0.1.3
+version: 0.1.4
 description: Open a SSH tunnel for the next command to make use of it.
 keywords:
   - ssh
@@ -23,6 +23,9 @@ properties:
     type: string
     required: false
   keepalive:
+    type: string
+    required: false
+  forward_only:
     type: string
     required: false
 
