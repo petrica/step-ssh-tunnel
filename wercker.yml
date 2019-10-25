@@ -4,6 +4,7 @@ build:
     steps:
         - shellcheck:
             files: run.sh
+            exclude: SC2029
         - script:
             name: prepare output
             code: rm -rf $WERCKER_ROOT/.git
